@@ -6,8 +6,6 @@ public class SquareType2 : MonoBehaviour
 {
     [Header ("사각형 장애물 생성 (가로)")]
 
-    public SpriteRenderer squareObject;     //생성한 오브젝트의 컬러를 바꾸기 위한 스프라이트 렌더
-
     public float scaleSpeed;                //스케일 변경 속도 변수
     public float colorSpeed;                //색 변경 속도 변수
     public float objectSpeed;               //오브젝트가 움직일때의 스피드값
@@ -16,7 +14,7 @@ public class SquareType2 : MonoBehaviour
 
     public bool onDir;
     private bool onColor, onDestroy, isColor, isMove, destroyObj, onScale;
-    
+    SpriteRenderer renderer;
     //x -0.5 -> 0.5 -> 0 -> 컬러 변경 -> 스케일 변경 하며 알파값 변경 -> 삭제
     
 
@@ -25,7 +23,8 @@ public class SquareType2 : MonoBehaviour
         onScale = false;
         //색을 하얀색으로 지정
         isMove = true;
-        squareObject.color = new Color(1, 0, 0, 1);
+
+        renderer.color = new Color(1, 0, 0, 1);
     }
     private void Update()
     {
@@ -70,28 +69,28 @@ public class SquareType2 : MonoBehaviour
 
     IEnumerator Effect()
     {
-        float g = squareObject.color.g + colorSpeed * Time.deltaTime;       //그린 값 연산
-        float b = squareObject.color.b + colorSpeed * Time.deltaTime;       //블루 값 연산
-        float a = squareObject.color.a - colorSpeed * Time.deltaTime;       //알파 값 연산
+        float g = renderer.color.g + colorSpeed * Time.deltaTime;       //그린 값 연산
+        float b = renderer.color.b + colorSpeed * Time.deltaTime;       //블루 값 연산
+        float a = renderer.color.a - colorSpeed * Time.deltaTime;       //알파 값 연산
 
         if(transform.localScale.y < 1f && onScale)      //오브젝트의 y 크기를 늘림
         {
             transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y + scaleSpeed * Time.deltaTime, transform.localScale.z);
         }
 
-        if (squareObject.color == new Color(1, 1, 1, 1))
+        if (renderer.color == new Color(1, 1, 1, 1))
         {
             isColor = true;
         }
 
         if (isColor)        //컬러를 레드로 바꿈
         {
-            squareObject.color = new Color(1, 0, 0, 1);
+            renderer.color = new Color(1, 0, 0, 1);
             isColor = false;
         }
         else                //바꾸고 난 후 컬러 변경
         {
-            squareObject.color = new Color(1, g, b, a);
+            renderer.color = new Color(1, g, b, a);
             destroyObj = true;
             onScale = true;
         }

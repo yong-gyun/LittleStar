@@ -144,7 +144,7 @@ public class Stage1_PatternManager : MonoBehaviour
             }
             else if (Timer >= 58 && Count == 6)      //선택지 발생
             {
-                if(!BattleEvent1.i.complete)
+                if (!BattleEvent1.i.complete)
                     BattleEvent1.i.SetEvent(1);
                 Destroy(circleSpawnerType1_Up.gameObject);
                 Destroy(circleSpawnerType1_Down.gameObject);

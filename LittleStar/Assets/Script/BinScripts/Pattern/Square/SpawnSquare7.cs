@@ -10,6 +10,7 @@ public class SpawnSquare7 : MonoBehaviour
     public GameObject squareObject;
     private bool upDown;
     private float Delay;
+
     private void Start()
     {
         Delay = 0;
